@@ -6,11 +6,14 @@ using System.Collections.Generic;
 [RequireComponent(typeof(InventoryManager))]
 [RequireComponent(typeof(WeatherManager))]
 [RequireComponent(typeof(ImagesManager))]
+[RequireComponent(typeof(MissionManager))]
 public class Managers : MonoBehaviour {
 
     // Статические свойства, которыми остальнйо код пользуется для доступа к диспетчерам
     public static PlayerManager Player { get; private set; }
     public static InventoryManager Inventory { get; private set; }
+    public static MissionManager Mission { get; private set; }
+
     public static WeatherManager Weather { get; private set; }
     public static ImagesManager Images { get; private set; }
 
@@ -18,14 +21,20 @@ public class Managers : MonoBehaviour {
 
     void Awake()
     {
+        DontDestroyOnLoad(gameObject); // Сохраняет объект между сценами
+
         Player = GetComponent<PlayerManager>();
         Inventory = GetComponent<InventoryManager>();
+        Mission = GetComponent<MissionManager>();
+
         Weather = GetComponent<WeatherManager>();
         Images = GetComponent<ImagesManager>();
 
         _startSequence = new List<IGameManager>();
         _startSequence.Add(Player);
         _startSequence.Add(Inventory);
+        _startSequence.Add(Mission);
+
         _startSequence.Add(Weather);
         _startSequence.Add(Images);
 
@@ -72,11 +81,14 @@ public class Managers : MonoBehaviour {
             if(numReady > lastReady)
             {
                 Debug.Log("Progress: " + numReady + "/" + numModules);
+
+                Messenger<int, int>.Broadcast(StartupEvent.MANAGERS_PROGRESS, numReady, numModules); // Событе загрузки рассылается без параметров
             }
 
             yield return null; // Остановка на один кадр перед следующей проверкой
         }
 
         Debug.Log("All managers started up");
+        Messenger.Broadcast(StartupEvent.MANAGERS_STARTED); // Событе загрузки рассылается вместе с относящимися к нему данными
     }
 }

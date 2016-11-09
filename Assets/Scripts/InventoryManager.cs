@@ -5,14 +5,17 @@ using System.Collections.Generic;
 public class InventoryManager : MonoBehaviour, IGameManager
 {
     private Dictionary<string, int> _items;
+    private NetworkService _network;
 
     public ManagerStatus status { get; private set; }
 
     public string equippedItem { get; private set;  }
 
-    public void Startup(NetworkService network)
+    public void Startup(NetworkService service)
     {
         Debug.Log("Inventory manager starting..."); // Сюда идут все задачи запуска с долгим временем выплнения
+
+        _network = service;
 
         _items = new Dictionary<string, int>(); // Инициализируем пустой список элементов.
 

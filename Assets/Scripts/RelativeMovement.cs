@@ -16,7 +16,12 @@ public class RelativeMovement : MonoBehaviour {
 
     public float pushForce = 3.0f;
 
+    public float deceleration = 20.0f;
+    public float targetBuffer = 1.5f;
+
     private float _vertSpeed;
+    private float _curSpeed = 0f;
+    private Vector3 _targetPos = Vector3.one;
 
     private Animator _animator;
 
@@ -39,9 +44,9 @@ public class RelativeMovement : MonoBehaviour {
         float horInput = Input.GetAxis("Horizontal");
         float vertInput = Input.GetAxis("Vertical");
 
-        if(horInput != 0 || vertInput != 0) // Движение обрабатывается только от клавиш со стрелками
+        if (horInput != 0 || vertInput != 0) // Движение обрабатывается только от клавиш со стрелками
         {
-            
+
             movement.x = horInput * moveSpeed;
             movement.z = vertInput * moveSpeed;
             movement = Vector3.ClampMagnitude(movement, moveSpeed);
@@ -57,6 +62,7 @@ public class RelativeMovement : MonoBehaviour {
             Quaternion direction = Quaternion.LookRotation(movement); // Вычесляем кватернион, смотрящий в этом направлении
             transform.rotation = Quaternion.Lerp(transform.rotation, direction, rotSpeed * Time.deltaTime); // Линейная интерполяция
         }
+
 
         _animator.SetFloat("Speed", movement.sqrMagnitude);
 
