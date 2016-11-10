@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\CheckpointTrigger.cs" />
     <Compile Include="Assets\Scripts\CollectibleItem.cs" />
     <Compile Include="Assets\Scripts\ColorChangeDevice.cs" />
+    <Compile Include="Assets\Scripts\DataManager.cs" />
     <Compile Include="Assets\Scripts\DeviceOperator.cs" />
     <Compile Include="Assets\Scripts\DeviceTrigger.cs" />
     <Compile Include="Assets\Scripts\DoorOpenDevice.cs" />
@@ -85,7 +86,9 @@
     <Compile Include="Assets\Scripts\MiniJSON.cs" />
     <Compile Include="Assets\Scripts\MissionManager.cs" />
     <Compile Include="Assets\Scripts\NetworkService.cs" />
+    <Compile Include="Assets\Scripts\ObjectiveTrigger.cs" />
     <Compile Include="Assets\Scripts\OrbitCamera.cs" />
+    <Compile Include="Assets\Scripts\PlatformTest.cs" />
     <Compile Include="Assets\Scripts\PlayerCharacter.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\PointClickMoment.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="Assets\Scripts\WeatherController.cs" />
     <Compile Include="Assets\Scripts\WeatherManager.cs" />
     <Compile Include="Assets\Scripts\WebLoadingBillboard.cs" />
+    <Compile Include="Assets\Scripts\WebTestObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\SkyboxBlended.shader" />

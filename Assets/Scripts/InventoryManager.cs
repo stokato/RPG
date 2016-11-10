@@ -17,6 +17,8 @@ public class InventoryManager : MonoBehaviour, IGameManager
 
         _network = service;
 
+        UpdateData(new Dictionary<string, int>());
+
         _items = new Dictionary<string, int>(); // Инициализируем пустой список элементов.
 
         status = ManagerStatus.Started;
@@ -100,5 +102,15 @@ public class InventoryManager : MonoBehaviour, IGameManager
         DisplayItems();
 
         return true;
+    }
+
+    public void UpdateData(Dictionary<string, int> items)
+    {
+        _items = items;
+    }
+
+    public Dictionary<string, int> GetData()
+    {
+        return _items;
     }
 }
